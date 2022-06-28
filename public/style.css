@@ -75,3 +75,11 @@
     line-height: 100%;
     transform: translateY(-50px);
 }
+.spot {
+    position: fixed;
+    opacity: 0.75;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    transition: all 3s linear, transform 3s ease-in-out;
+}
