@@ -46,6 +46,10 @@ io.on("connection", (socket) => {
         socket.broadcast.emit("update-player", id, infos);
     });
 
+    socket.on("player-send-message", (message) => {
+        socket.broadcast.emit("player-send-message", socket.id, message);
+    });
+
     socket.on("disconnect", () => {
         console.log(`[Disconnect] ${socket.id}`);
         socket.broadcast.emit("player-disconnect", socket.id);

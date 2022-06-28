@@ -14,10 +14,20 @@
                 <input type="color" id="player-color">
                 <input type="submit" value="Mettre à jour">
             </form>
+            <br>
+            <form id="tchat">
+                <input type="text" placeholder="Cliquez ici pour publier un message" id="message" min="1" maxlength="42" required>
+                <input type="submit" value="Envoyer" id="send-message">
+            </form>
         </div>
         <div id="player" class="player">
             <img id="player-eyes" class="player-eyes" src="imgs/eyes.png">
             <span id="player-name" class="player-name">Joueur</span>
+            <img id="player-message-bubble-image" class="message-bubble-image" src="imgs/message-bubble.png">
+            <div id="player-message-bubble" class="message-bubble">
+                <span id="player-message"></span>
+            </div>
+            <img onclick="closeTchat('player')" id="close-player-message-bubble" class="close-message-bubble" src="imgs/close.png">
         </div>
     </div>
 

@@ -37,6 +37,11 @@ socket.on("player-join", (id, infos) => {
     const newPlayerHTML =   `<div id="${id}" class="player">
                             <img id="${id}-eyes" class="player-eyes" src="imgs/eyes.png">
                             <span id="${id}-name" class="player-name">${infos[0]}</span>
+                            <img id="${id}-message-bubble-image" class="message-bubble-image" src="imgs/message-bubble.png">
+                            <div id="${id}-message-bubble" class="message-bubble">
+                                <span id="${id}-message"></span>
+                            </div>
+                            <img onclick="closeTchat('${id}')" id="close-${id}-message-bubble" class="close-message-bubble" src="imgs/close.png">
                         </div>`;
     $("#game").append(newPlayerHTML);
     const newPlayer = $(`#${id}`);
@@ -55,6 +60,11 @@ socket.on("get-players", (players) => {
             const newPlayerHTML = `<div id="${key}" class="player">
                                         <img id="${key}-eyes" class="player-eyes" src="imgs/eyes.png">
                                         <span id="${key}-name" class="player-name">${infos[0]}</span>
+                                        <img id="${key}-message-bubble-image" class="message-bubble-image" src="imgs/message-bubble.png">
+                                        <div id="${key}-message-bubble" class="message-bubble">
+                                            <span id="${key}-message"></span>
+                                        </div>
+                                        <img onclick="closeTchat('${key}')" id="close-${key}-message-bubble" class="close-message-bubble" src="imgs/close.png">
                                     </div>`;
             $("#game").append(newPlayerHTML);
             const newPlayer = $(`#${key}`);
@@ -100,27 +110,72 @@ function getCoo(coo) {
     return parseInt(coo.replace("px", ""));
 }
 
+function canMove(top, left) {
+    if (top <= 50) return false;
+    if (left <= 50) return false;
+    if (top >= 2000) return false;
+    if (left >= 2000) return false;
+    return true;
+}
+
 document.addEventListener('keydown', function(e) {
     switch (e.key) {
         case "ArrowUp":
-            player.css("top", (getCoo(player.css("top")) - speed ) + "px");
+            if (canMove(getCoo(player.css("top")) - speed, getCoo(player.css("left")))) player.css("top", (getCoo(player.css("top")) - speed ) + "px");
             break;
         case "ArrowDown":
-            player.css("top", (getCoo(player.css("top")) + speed ) + "px");
+            if (canMove(getCoo(player.css("top")) + speed, getCoo(player.css("left")))) player.css("top", (getCoo(player.css("top")) + speed ) + "px");
             break;
         case "ArrowLeft":
-            player.css("left", (getCoo(player.css("left")) - speed ) + "px");
-            playerEyes.css("transform", "scaleX(-1)");
+            if (canMove(getCoo(player.css("top")), getCoo(player.css("left")) - speed)) {
+                player.css("left", (getCoo(player.css("left")) - speed ) + "px");
+                playerEyes.css("transform", "scaleX(-1)");
+            }
             break;
         case "ArrowRight":
-            player.css("left", (getCoo(player.css("left")) + speed ) + "px");
-            playerEyes.css("transform", "scaleX(1)");
+            if (canMove(getCoo(player.css("top")), getCoo(player.css("left")) + speed)) {
+                player.css("left", (getCoo(player.css("left")) + speed ) + "px");
+                playerEyes.css("transform", "scaleX(1)");
+            }
             break;
         default:
             return;
     }
     emitUpdate();
 });
+
+$("#tchat").on('submit', function (e) {
+    e.preventDefault();
+
+    const message = $("#message").val();
+
+    socket.emit("player-send-message", message)
+
+    $("#player-message-bubble-image").css("opacity", 1);
+    $("#player-message-bubble-image").css("transform", "translateY(-125px)");
+    $("#player-message-bubble").css("opacity", 1);
+    $("#player-message-bubble").css("transform", "translateY(-133px)");
+    $("#close-player-message-bubble").css("transform", "translateY(-175px) translateX(75px) scale(1)")
+    $("#player-message").text(message);
+    $("#message").val("");
+});
+
+socket.on("player-send-message", (id, message) => {
+    $(`#${id}-message-bubble-image`).css("opacity", 1);
+    $(`#${id}-message-bubble-image`).css("transform", "translateY(-125px)");
+    $(`#${id}-message-bubble`).css("opacity", 1);
+    $(`#${id}-message-bubble`).css("transform", "translateY(-133px)");
+    $(`#close-${id}-message-bubble`).css("transform", "translateY(-175px) translateX(75px) scale(1)")
+    $(`#${id}-message`).text(message);
+});
+
+function closeTchat(id) {
+    $(`#close-${id}-message-bubble`).css("transform", "translateY(-175px) translateX(75px) scale(0)")
+    $(`#${id}-message-bubble-image`).css("opacity", 0);
+    $(`#${id}-message-bubble-image`).css("transform", "translateY(-100px)");
+    $(`#${id}-message-bubble`).css("opacity", 0);
+    $(`#${id}-message-bubble`).css("transform", "translateY(-100px)");
+}
 
 socket.on("player-disconnect", (id) => {
     $(`#${id}`).remove();

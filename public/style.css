@@ -1,12 +1,15 @@
+* {
+    transition: all 0.1s ease;
+}
 #game {
     position: fixed;
     padding:0;
     margin:0;
     top:0;
     left:0;
-    width: 100%;
-    height: 100%;
-    background-color: gray;
+    width: 2100px;
+    height: 2100px;
+    background-color: #353535;
 }
 .tab {
     position: fixed;
@@ -31,6 +34,36 @@
     height: 50px;
     width: auto;
 }
+.message-bubble-image {
+    opacity: 0;
+    position: absolute;
+    height: 125px;
+    width: 150px;
+    transform: translateY(-100px);
+    transition: all 0.5s ease;
+}
+.message-bubble {
+    opacity: 0;
+    position: absolute;
+    height: 65px;
+    width: 137px;
+    transform: translateY(-100px);
+    padding: 5px 5px;
+    text-align: center;
+    color: white;
+    font-size: 17px;
+    font-family: 'Chau Philomene One', sans-serif;
+    overflow-wrap: break-word;
+    transition: all 0.5s ease;
+}
+.close-message-bubble {
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    transform: translateY(-175px) translateX(75px) scale(0);
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
 .player-name {
     text-align: center;
     position: absolute;
@@ -41,7 +74,4 @@
     width: 200%;
     line-height: 100%;
     transform: translateY(-50px);
-}
-* {
-    transition: all 0.1s ease;
 }
