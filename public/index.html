@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Nightclub</title>
+</head>
+<body>
+    <div id="game">
+        <div class="tab">
+            <form id="options">
+                <input type="text" placeholder="Votre pseudo" id="pseudo" minlength="2" maxlength="20" required>
+                <input type="color" id="player-color">
+                <input type="submit" value="Mettre à jour">
+            </form>
+        </div>
+        <div id="player" class="player">
+            <img id="player-eyes" class="player-eyes" src="imgs/eyes.png">
+            <span id="player-name" class="player-name">Joueur</span>
+        </div>
+    </div>
+
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="https://github.com/js-cookie/js-cookie/releases/download/v3.0.1/js.cookie.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>
