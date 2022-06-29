@@ -66,6 +66,26 @@ body {
     background-color: #353535;
     overflow: auto;
 }
+
+#dj-stuff {
+    pointer-events: none;
+}
+#dj-table {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+#spot1 {
+    position: absolute;
+    top: 275px;
+    left: 880px;
+}
+#spot2 {
+    position: absolute;
+    top: 275px;
+    left: 275px;
+}
+
 .player {
     opacity: 0;
     display: flex;
