@@ -22,8 +22,8 @@ if (Cookies.get("username") == undefined || Cookies.get("color") == undefined) {
 const player = $("#player");
 const playerEyes = $("#player-eyes");
 
-player.css("left", (window.innerWidth/2) + "px");
-player.css("top", (window.innerHeight/2) + "px");
+player.css("left", "1000px");
+player.css("top", "1000px");
 
 const playerColor = Cookies.get("color");
 $("#player").css("background-color", playerColor);
@@ -169,4 +169,5 @@ $("#enter-button").on("click", (e) => {
     document.addEventListener('keydown', (e) => {
         move(e.key.replace("Arrow", "").toLowerCase());
     });
+    document.body.onwheel = onScrollWheel;
 });

@@ -7,53 +7,58 @@
     <title>Nightclub</title>
 </head>
 <body>
-    <div id="welcome-screen">
-        <h1 id="welcome-message">Bienvenue !</h1>
-        <p id="warning-message">Attention ! Ce site contient des flash lumineux important.
-            Il est donc recommandé aux personnes épileptiques de ne pas participer à cette experience.</p>
-        <input id="enter-button" type="submit" value="Entrer dans le club">
-    </div>
-    <div id="game">
-        <div id="mobile-control">
-            <button></button>
-            <button onclick="move('up')">↑</button>
-            <button></button>
-
-            <button onclick="move('left')">←</button>
-            <button></button>
-            <button onclick="move('right')">→</button>
-
-            <button></button>
-            <button onclick="move('down')">↓</button>
-            <button></button>
+    <div id="can-move">
+        <div id="welcome-screen">
+            <h1 id="welcome-message">Bienvenue !</h1>
+            <p id="warning-message">Attention ! Ce site contient des flash lumineux important.
+                Il est donc recommandé aux personnes épileptiques de ne pas participer à cette experience.</p>
+            <input id="enter-button" type="submit" value="Entrer dans le club">
         </div>
-        <div class="tab">
-            <form id="options">
-                <input type="text" placeholder="Votre pseudo" id="pseudo" minlength="2" maxlength="20" required>
-                <input type="color" id="player-color">
-                <input type="submit" value="Mettre à jour">
-            </form>
-            <br>
-            <form id="tchat">
-                <input type="text" placeholder="Cliquez ici pour publier un message" id="message" min="1" maxlength="42" required>
-                <input type="submit" value="Envoyer" id="send-message">
-            </form>
-        </div>
-        <div id="player" class="player" hidden>
-            <img id="player-eyes" class="player-eyes" src="imgs/eyes.png">
-            <span id="player-name" class="player-name">Joueur</span>
-            <img id="player-message-bubble-image" class="message-bubble-image" src="imgs/message-bubble.png">
-            <div id="player-message-bubble" class="message-bubble">
-                <span id="player-message"></span>
+        <div id="game">
+            <div id="player" class="player" hidden>
+                <img id="player-eyes" class="player-eyes" src="imgs/eyes.png">
+                <span id="player-name" class="player-name">Joueur</span>
+                <img id="player-message-bubble-image" class="message-bubble-image" src="imgs/message-bubble.png">
+                <div id="player-message-bubble" class="message-bubble">
+                    <span id="player-message"></span>
+                </div>
+                <img onclick="closeTchat('player')" id="close-player-message-bubble" class="close-message-bubble" src="imgs/close.png">
             </div>
-            <img onclick="closeTchat('player')" id="close-player-message-bubble" class="close-message-bubble" src="imgs/close.png">
+            <div id="spots"></div>
         </div>
-        <div id="spots"></div>
     </div>
+
+    <div id="mobile-control">
+        <button></button>
+        <button onclick="move('up')">↑</button>
+        <button></button>
+
+        <button onclick="move('left')">←</button>
+        <button></button>
+        <button onclick="move('right')">→</button>
+
+        <button></button>
+        <button onclick="move('down')">↓</button>
+        <button></button>
+    </div>
+    <div class="tab">
+        <form id="options">
+            <input type="text" placeholder="Votre pseudo" id="pseudo" minlength="2" maxlength="20" required>
+            <input type="color" id="player-color">
+            <input type="submit" value="Mettre à jour">
+        </form>
+        <br>
+        <form id="tchat">
+            <input type="text" placeholder="Cliquez ici pour publier un message" id="message" min="1" maxlength="42" required>
+            <input type="submit" value="Envoyer" id="send-message">
+        </form>
+    </div>
+
 
     <script src="/jquery/jquery.min.js"></script>
     <script src="https://github.com/js-cookie/js-cookie/releases/download/v3.0.1/js.cookie.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="mouseScroll.js"></script>
     <script src="client.js"></script>
     <script src="move.js"></script>
     <script src="lighting.js"></script>

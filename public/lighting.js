@@ -23,8 +23,8 @@ function animeSpots() {
         const spot = spots[i];
         spot.style.filter = `opacity(0.4) drop-shadow(0 0 0 ${randomColor()})`;
         spot.style.transform = `rotate(${randomInt(1080)}deg)`;
-        spot.style.top = randomInt(2000) + "px";
-        spot.style.left = randomInt(2000) + "px";
+        spot.style.top = randomInt(1800) + "px";
+        spot.style.left = randomInt(1800) + "px";
         spot.src = randomGobo();
     }
 }
