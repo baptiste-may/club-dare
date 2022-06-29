@@ -14,6 +14,19 @@
         <input id="enter-button" type="submit" value="Entrer dans le club">
     </div>
     <div id="game">
+        <div id="mobile-control">
+            <button></button>
+            <button onclick="move('up')">↑</button>
+            <button></button>
+
+            <button onclick="move('left')">←</button>
+            <button></button>
+            <button onclick="move('right')">→</button>
+
+            <button></button>
+            <button onclick="move('down')">↓</button>
+            <button></button>
+        </div>
         <div class="tab">
             <form id="options">
                 <input type="text" placeholder="Votre pseudo" id="pseudo" minlength="2" maxlength="20" required>
@@ -42,6 +55,7 @@
     <script src="https://github.com/js-cookie/js-cookie/releases/download/v3.0.1/js.cookie.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
+    <script src="move.js"></script>
     <script src="lighting.js"></script>
 </body>
 </html>

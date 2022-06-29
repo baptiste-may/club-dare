@@ -166,29 +166,7 @@ $("#enter-button").on("click", (e) => {
     $("#player").show();
     socket.emit("player-join", playerName, playerColor, player.css("top"), player.css("left"), playerEyes.css("transform"));
 
-    document.addEventListener('keydown', function(e) {
-        switch (e.key) {
-            case "ArrowUp":
-                if (canMove(getCoo(player.css("top")) - speed, getCoo(player.css("left")))) player.css("top", (getCoo(player.css("top")) - speed ) + "px");
-                break;
-            case "ArrowDown":
-                if (canMove(getCoo(player.css("top")) + speed, getCoo(player.css("left")))) player.css("top", (getCoo(player.css("top")) + speed ) + "px");
-                break;
-            case "ArrowLeft":
-                if (canMove(getCoo(player.css("top")), getCoo(player.css("left")) - speed)) {
-                    player.css("left", (getCoo(player.css("left")) - speed ) + "px");
-                    playerEyes.css("transform", "scaleX(-1)");
-                }
-                break;
-            case "ArrowRight":
-                if (canMove(getCoo(player.css("top")), getCoo(player.css("left")) + speed)) {
-                    player.css("left", (getCoo(player.css("left")) + speed ) + "px");
-                    playerEyes.css("transform", "scaleX(1)");
-                }
-                break;
-            default:
-                return;
-        }
-        emitUpdate();
+    document.addEventListener('keydown', (e) => {
+        move(e.key.replace("Arrow", "").toLowerCase());
     });
 });

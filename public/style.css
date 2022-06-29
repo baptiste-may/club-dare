@@ -1,6 +1,9 @@
 * {
     transition: all 0.1s ease;
 }
+body {
+    background-color: black;
+}
 #welcome-screen {
     opacity: 1;
     display: grid;
@@ -25,8 +28,8 @@
 #warning-message {
     text-align: center;
     margin: auto;
-    max-width: 1000px;
-    font-size: 200%;
+    max-width: 750px;
+    font-size: 300%;
     padding: 2% 2%;
     border: 3px solid red;
     background-color: rgba(255, 0, 0, 0.5);
@@ -60,9 +63,37 @@
     background-color: #353535;
     overflow: auto;
 }
+#mobile-control {
+    z-index: 13;
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr;
+    position: fixed;
+    opacity: 0;
+    bottom: 150px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 500px;
+    height: 500px;
+    border: 5px solid white;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+#mobile-control button {
+    max-width: 500px;
+    max-height: 500px;
+    font-size: 100px;
+    color: gray;
+    background: none;
+    border: none;
+}
+@media (pointer:none), (pointer:coarse) {
+    #mobile-control {
+        opacity: 0.75;
+    }
+}
 .tab {
     position: fixed;
-    z-index: 14;
+    z-index: 10;
     bottom: 0;
     width: 100%;
     height: 100px;
