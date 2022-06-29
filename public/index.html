@@ -7,6 +7,12 @@
     <title>Nightclub</title>
 </head>
 <body>
+    <div id="welcome-screen">
+        <h1 id="welcome-message">Bienvenue !</h1>
+        <p id="warning-message">Attention ! Ce site contient des flash lumineux important.
+            Il est donc recommandé aux personnes épileptiques de ne pas participer à cette experience.</p>
+        <input id="enter-button" type="submit" value="Entrer dans le club">
+    </div>
     <div id="game">
         <div class="tab">
             <form id="options">
@@ -20,7 +26,7 @@
                 <input type="submit" value="Envoyer" id="send-message">
             </form>
         </div>
-        <div id="player" class="player">
+        <div id="player" class="player" hidden>
             <img id="player-eyes" class="player-eyes" src="imgs/eyes.png">
             <span id="player-name" class="player-name">Joueur</span>
             <img id="player-message-bubble-image" class="message-bubble-image" src="imgs/message-bubble.png">

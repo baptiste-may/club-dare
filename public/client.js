@@ -32,7 +32,6 @@ const playerName = Cookies.get("username");
 $("#player-name").text(playerName);
 
 
-socket.emit("player-join", playerName, playerColor, player.css("top"), player.css("left"), playerEyes.css("transform"));
 socket.on("player-join", (id, infos) => {
     const newPlayerHTML =   `<div id="${id}" class="player">
                             <img id="${id}-eyes" class="player-eyes" src="imgs/eyes.png">
@@ -48,6 +47,7 @@ socket.on("player-join", (id, infos) => {
     newPlayer.css("background-color", infos[1]);
     newPlayer.css("top", infos[2]);
     newPlayer.css("left", infos[3]);
+    newPlayer.css("opacity", 1);
 });
 
 socket.emit("get-players");
@@ -71,6 +71,7 @@ socket.on("get-players", (players) => {
             newPlayer.css("background-color", infos[1]);
             newPlayer.css("top", infos[2]);
             newPlayer.css("left", infos[3]);
+            newPlayer.css("opacity", 1);
         }
     }
 });
@@ -118,32 +119,6 @@ function canMove(top, left) {
     return true;
 }
 
-document.addEventListener('keydown', function(e) {
-    switch (e.key) {
-        case "ArrowUp":
-            if (canMove(getCoo(player.css("top")) - speed, getCoo(player.css("left")))) player.css("top", (getCoo(player.css("top")) - speed ) + "px");
-            break;
-        case "ArrowDown":
-            if (canMove(getCoo(player.css("top")) + speed, getCoo(player.css("left")))) player.css("top", (getCoo(player.css("top")) + speed ) + "px");
-            break;
-        case "ArrowLeft":
-            if (canMove(getCoo(player.css("top")), getCoo(player.css("left")) - speed)) {
-                player.css("left", (getCoo(player.css("left")) - speed ) + "px");
-                playerEyes.css("transform", "scaleX(-1)");
-            }
-            break;
-        case "ArrowRight":
-            if (canMove(getCoo(player.css("top")), getCoo(player.css("left")) + speed)) {
-                player.css("left", (getCoo(player.css("left")) + speed ) + "px");
-                playerEyes.css("transform", "scaleX(1)");
-            }
-            break;
-        default:
-            return;
-    }
-    emitUpdate();
-});
-
 $("#tchat").on('submit', function (e) {
     e.preventDefault();
 
@@ -179,4 +154,41 @@ function closeTchat(id) {
 
 socket.on("player-disconnect", (id) => {
     $(`#${id}`).remove();
+});
+
+$("#enter-button").on("click", (e) => {
+    $("#welcome-screen").css("opacity", 0);
+    setTimeout(() => {
+        $("#welcome-screen").remove();
+    }, 2000);
+
+    $("#player").css("opacity", 1);
+    $("#player").show();
+    socket.emit("player-join", playerName, playerColor, player.css("top"), player.css("left"), playerEyes.css("transform"));
+
+    document.addEventListener('keydown', function(e) {
+        switch (e.key) {
+            case "ArrowUp":
+                if (canMove(getCoo(player.css("top")) - speed, getCoo(player.css("left")))) player.css("top", (getCoo(player.css("top")) - speed ) + "px");
+                break;
+            case "ArrowDown":
+                if (canMove(getCoo(player.css("top")) + speed, getCoo(player.css("left")))) player.css("top", (getCoo(player.css("top")) + speed ) + "px");
+                break;
+            case "ArrowLeft":
+                if (canMove(getCoo(player.css("top")), getCoo(player.css("left")) - speed)) {
+                    player.css("left", (getCoo(player.css("left")) - speed ) + "px");
+                    playerEyes.css("transform", "scaleX(-1)");
+                }
+                break;
+            case "ArrowRight":
+                if (canMove(getCoo(player.css("top")), getCoo(player.css("left")) + speed)) {
+                    player.css("left", (getCoo(player.css("left")) + speed ) + "px");
+                    playerEyes.css("transform", "scaleX(1)");
+                }
+                break;
+            default:
+                return;
+        }
+        emitUpdate();
+    });
 });

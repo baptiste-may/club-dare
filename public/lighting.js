@@ -1,5 +1,5 @@
 
-const gobos = ["dots", "gridball", "MG-05", "MG-06", "MG-07", "MG-13", "spiral"];
+const gobos = ["dots", "gridball", "MG-05", "MG-06", "MG-07", "MG-13", "none", "spiral"];
 
 for (i = 0; i <= 20; i++) {
     const spot = document.createElement("img");
@@ -21,7 +21,7 @@ function randomGobo() {
 function animeSpots() {
     for (i = 0; i < spots.length; i++) {
         const spot = spots[i];
-        spot.style.filter = `opacity(0.5) drop-shadow(0 0 0 ${randomColor()})`;
+        spot.style.filter = `opacity(0.4) drop-shadow(0 0 0 ${randomColor()})`;
         spot.style.transform = `rotate(${randomInt(1080)}deg)`;
         spot.style.top = randomInt(2000) + "px";
         spot.style.left = randomInt(2000) + "px";
