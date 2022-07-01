@@ -34,3 +34,23 @@ setTimeout(() => {
     animeSpots();
 }, 1);
 setInterval(animeSpots, 3000);
+
+
+maxDeg = 45;
+movement = true;
+function moveSpot() {
+    if (movement) {
+        $("#spot1").css("transform", `rotate(${maxDeg}deg)`);
+        $("#spot2").css("transform", `rotate(-${maxDeg}deg)`);
+    } else {
+        $("#spot1").css("transform", `rotate(-${maxDeg}deg)`);
+        $("#spot2").css("transform", `rotate(${maxDeg}deg)`);
+    }
+    movement = ! movement;
+    /*
+    $("#spot1").css("filter", `opacity(0.4) drop-shadow(0 0 0 ${randomColor()})`);
+    $("#spot2").css("filter", `opacity(0.4) drop-shadow(0 0 0 ${randomColor()})`);
+    */
+}
+
+setInterval(moveSpot, 2000);

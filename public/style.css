@@ -77,13 +77,17 @@ body {
 }
 #spot1 {
     position: absolute;
-    top: 275px;
-    left: 880px;
+    top: 272px;
+    left: 883px;
+    transform-origin: 464px 30px;
+    transition: all 2s ease-in-out;
 }
 #spot2 {
     position: absolute;
-    top: 275px;
-    left: 275px;
+    top: 272px;
+    left: 277px;
+    transform-origin: 464px 30px;
+    transition: all 2s ease-in-out;
 }
 
 .player {
