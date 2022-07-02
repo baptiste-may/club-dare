@@ -19,7 +19,7 @@ body {
     backdrop-filter: blur(10px);
     z-index: 15;
     color: white;
-    font-family: 'Chau Philomene One', sans-serif;
+    font-family: 'TT Interphases Var Roman', sans-serif;
     cursor: auto;
     transition: all 2s ease;
 }
@@ -43,7 +43,7 @@ body {
     margin: auto;
     font-size: 300%;
     color: white;
-    font-family: 'Chau Philomene One', sans-serif;
+    font-family: 'TT Interphases Var Roman', sans-serif;
     background: none;
     border: 3px solid white;
     border-radius: 10px;
@@ -124,7 +124,7 @@ body {
     text-align: center;
     color: white;
     font-size: 17px;
-    font-family: 'Chau Philomene One', sans-serif;
+    font-family: 'TT Interphases Var Roman', sans-serif;
     overflow-wrap: break-word;
     transition: all 0.5s ease;
 }
@@ -142,7 +142,7 @@ body {
     font-size: 30px;
     color: white;
     -webkit-text-stroke: 1px black;
-    font-family: 'Chau Philomene One', sans-serif;
+    font-family: 'TT Interphases Var Roman', sans-serif;
     width: 200%;
     line-height: 100%;
     transform: translateY(-50px);
