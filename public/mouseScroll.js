@@ -46,6 +46,3 @@ const mouseUpHandler = function () {
     document.removeEventListener('mousemove', mouseMoveHandler);
     document.removeEventListener('mouseup', mouseUpHandler);
 };
-
-// Attach the handler
-ele.addEventListener('mousedown', mouseDownHandler);

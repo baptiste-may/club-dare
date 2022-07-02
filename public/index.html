@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no" />
     <link href="//db.onlinewebfonts.com/c/4d7da4428b5dd539fb6d8d208471acc8?family=TT+Interphases+Var+Roman" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="imgs/icon.png">
@@ -48,15 +49,20 @@
         <button onclick="move('down')">↓</button>
         <button></button>
     </div>
-    <div class="tab">
+
+    <div id="tab">
         <form id="options">
+            <h2>Options</h2>
             <input type="text" placeholder="Votre pseudo" id="pseudo" minlength="2" maxlength="20" required>
             <input type="color" id="player-color">
-            <input type="submit" value="Mettre à jour">
+            <br>
+            <input type="submit" id="update" value="Mettre à jour">
         </form>
-        <br>
-        <form id="tchat">
+        <img id="hide-show-tab" src="imgs/down.png">
+        <form id="tchat" autocomplete="off">
+            <h2>Chat</h2>
             <input type="text" placeholder="Cliquez ici pour publier un message" id="message" min="1" maxlength="42" required>
+            <br>
             <input type="submit" value="Envoyer" id="send-message">
         </form>
     </div>
@@ -67,6 +73,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="mouseScroll.js"></script>
     <script src="client.js"></script>
+    <script src="tab.js"></script>
     <script src="move.js"></script>
     <script src="lighting.js"></script>
 </body>
