@@ -189,7 +189,7 @@ body {
 #hide-show-tab {
     position: relative;
     margin: auto;
-    width: 50%;
+    width: 100%;
     max-width: 150px;
     height: auto;
     cursor: pointer;
@@ -198,7 +198,7 @@ body {
 }
 #tab {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 0.25fr 1fr;
     position: fixed;
     z-index: 10;
     bottom: 0;
@@ -216,6 +216,13 @@ body {
     border-radius: 10px;
     font-size: 1.25em;
 }
-#update, #send-message {
+#player-color {
+    padding: 0 !important;
+    border: none;
+    background: none;
+    width: 2em;
+    height: 2em;
+}
+#player-color, #update, #send-message {
     cursor: pointer;
 }
