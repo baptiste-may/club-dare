@@ -1,0 +1,1 @@
+![](https://cdn.discordapp.com/attachments/555402600640413713/994205343578066974/Banniere_-_Club_Dare.png)
