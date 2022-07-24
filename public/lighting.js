@@ -1,12 +1,5 @@
 
-const gobos = ["dots", "gridball", "MG-05", "MG-06", "MG-07", "MG-13", "none", "spiral"];
-
-for (i = 0; i <= 20; i++) {
-    const spot = document.createElement("img");
-    spot.className = "spot";
-    spot.src = "imgs/gobo/spiral.png";
-    document.getElementById("spots").appendChild(spot);
-}
+const gobos = ["dots", "gridball", "MG-05", "MG-06", "MG-07", "MG-13", "none", "none", "spiral"];
 
 const spots = document.getElementsByClassName("spot");
 
@@ -29,11 +22,43 @@ function animeSpots() {
     }
 }
 
-animeSpots();
-setTimeout(() => {
+let interval = null;
+function setSpots(number, timer) {
+
+    clearInterval(interval);
+    $("#spots").empty();
+
+    if (number == 0) return;
+
+    for (i = 0; i <= number; i++) {
+        const spot = document.createElement("img");
+        spot.style.transition = `all ${timer}ms linear, transform ${timer}ms ease-in`;
+        spot.className = "spot";
+        spot.src = "imgs/gobo/spiral.png";
+        document.getElementById("spots").appendChild(spot);
+    }
+
     animeSpots();
-}, 1);
-setInterval(animeSpots, 3000);
+    setTimeout(animeSpots, 10);
+    interval = setInterval(animeSpots, timer);
+}
+
+socket.emit("get-lighting");
+socket.on("get-lighting", (data) => {
+    data = JSON.parse(data);
+    const spotsData = data.spots;
+    setSpots(parseInt(spotsData.number), parseInt(spotsData.timer));
+});
+
+function spotsUpdate() {
+    setSpots($("#gobo-range").val(), $("#gobo-timer").val());
+
+    const data = {spots: {number: $("#gobo-range").val(), timer: $("#gobo-timer").val()}};
+    socket.emit("edit-lighting", Cookies.get("secret-token"), data);
+}
+
+$("#gobo-range").on("input", spotsUpdate);
+$("#gobo-timer").on("input", spotsUpdate);
 
 
 maxDeg = 45;
@@ -54,3 +79,10 @@ function moveSpot() {
 }
 
 setInterval(moveSpot, 2000);
+
+
+socket.on("edit-lighting", (data) => {
+    data = JSON.parse(data);
+    const spotsData = data.spots;
+    setSpots(parseInt(spotsData.number), parseInt(spotsData.timer));
+});

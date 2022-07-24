@@ -12,6 +12,20 @@ $("#close-help-tab").on("click", () => {
     }, 1000);
 });
 
+$("#lighting-button").on("click", () => {
+    $("#lighting-tab").css("display", "grid");
+    setTimeout(() => {
+        $("#lighting-tab").css("opacity", 1);
+    }, 1);
+});
+$("#close-lighting-tab").on("click", () => {
+    $("#lighting-tab").css("opacity", 0);
+    setTimeout(() => {
+        $("#lighting-tab").css("display", "none");
+    }, 1000);
+});
+
+
 tabOpened = true;
 
 $("#hide-show-tab").on("click", (e) => {

@@ -25,7 +25,8 @@ http.listen(port, () => {
     console.log(`App server is running on port ${port}`);
 });
 
-players = {};
+var players = {};
+var lightingData = {spots: {number: 10, timer: 2000}};
 
 io.on("connection", (socket) => {
     console.log(`[+] ${socket.id}`);
@@ -55,6 +56,18 @@ io.on("connection", (socket) => {
     socket.on("check-secret-token", (token) => {
         if (process.env.SECRET_TOKEN == token) socket.emit("check-secret-token", true);
         else socket.emit("check-secret-token", false);
+    });
+
+    socket.on("edit-lighting", (token, data) => {
+        if (process.env.SECRET_TOKEN == token) {
+            if (data.spots != undefined && data.spots.number != undefined && data.spots.timer != undefined) {
+                lightingData = data;
+                socket.broadcast.emit("edit-lighting", JSON.stringify(data));
+            }
+        }
+    });
+    socket.on("get-lighting", () => {
+        socket.emit("get-lighting", JSON.stringify(lightingData));
     });
 
     socket.on("disconnect", () => {

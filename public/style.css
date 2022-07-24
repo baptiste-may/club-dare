@@ -68,6 +68,44 @@ body {
     filter: invert(17%) sepia(93%) saturate(6932%) hue-rotate(0deg) brightness(100%) contrast(117%);
     cursor: pointer;
 }
+#lighting-button {
+    z-index: 14;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+#lighting-tab {
+    display: none;
+    opacity: 0;
+    position: fixed;
+    align-items: center;
+    justify-items: center;
+    z-index: 15;
+    width: 25%;
+    max-width: 250px;
+    height: 25%;
+    max-height: 250px;
+    right: 15px;
+    background-color: gray;
+    border: 5px solid rgb(175, 175, 175);
+    border-radius: 25px;
+    font-size: 0.75em;
+    transition: opacity 1s ease-in-out;
+}
+#close-lighting-tab {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: 0;
+    left: 0;
+    filter: invert(17%) sepia(93%) saturate(6932%) hue-rotate(0deg) brightness(100%) contrast(117%);
+    cursor: pointer;
+}
+
 #welcome-screen {
     opacity: 1;
     display: grid;
@@ -215,7 +253,6 @@ body {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    transition: all 3s linear, transform 3s ease-in;
 }
 
 #mobile-control {

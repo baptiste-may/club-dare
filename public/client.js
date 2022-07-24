@@ -1,6 +1,16 @@
 
 const socket = io();
 
+var hasSecretToken = false;
+socket.emit("check-secret-token", Cookies.get("secret-token"));
+socket.on("check-secret-token", (res) => {
+    hasSecretToken = res;
+    if (!res) {
+        $("#lighting-button").remove();
+        $("#lighting-tab").remove();
+    }
+});
+
 function randomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -97,12 +107,6 @@ function getCoo(coo) {
 
 privateZone = []
 privateZone.push({firstPoint: {top: 50, left: 550}, secondPoint: {top: 400, left: 1450}});
-
-hasSecretToken = false;
-socket.emit("check-secret-token", Cookies.get("secret-token"));
-socket.on("check-secret-token", (res) => {
-    hasSecretToken = res;
-});
 
 async function canMove(top, left) {
     if (top <= 50) return false;
