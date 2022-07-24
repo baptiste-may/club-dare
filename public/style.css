@@ -6,6 +6,68 @@ body {
     background-color: black;
     overflow: hidden;
 }
+#help-button {
+    z-index: 13;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+#help-tab-bg {
+    z-index: 14;
+    opacity: 0;
+    display: none;
+    justify-items: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    transition: opacity 1s ease-in-out;
+}
+#help-tab {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 15;
+    width: 75%;
+    max-width: 750px;
+    height: 50%;
+    max-height: 500px;
+    margin: auto;
+    background-color: gray;
+    border: 5px solid rgb(175, 175, 175);
+    border-radius: 25px;
+}
+#help-tab p {
+    color: white;
+    font-size: 3em;
+}
+#help-tab p a {
+    color: rgb(220, 220, 220);
+    text-decoration: underline rgba(220, 220, 220, 0);
+    transition: 0.25s ease;
+}
+#help-tab p a:hover {
+    text-decoration-color: rgba(220, 220, 220, 1);
+}
+#close-help-tab {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: 0;
+    right: 0;
+    filter: invert(17%) sepia(93%) saturate(6932%) hue-rotate(0deg) brightness(100%) contrast(117%);
+    cursor: pointer;
+}
 #welcome-screen {
     opacity: 1;
     display: grid;

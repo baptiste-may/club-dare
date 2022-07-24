@@ -1,4 +1,17 @@
 
+$("#help-button").on("click", () => {
+    $("#help-tab-bg").css("display", "grid");
+    setTimeout(() => {
+        $("#help-tab-bg").css("opacity", 1);
+    }, 1);
+});
+$("#close-help-tab").on("click", () => {
+    $("#help-tab-bg").css("opacity", 0);
+    setTimeout(() => {
+        $("#help-tab-bg").css("display", "none");
+    }, 1000);
+});
+
 tabOpened = true;
 
 $("#hide-show-tab").on("click", (e) => {
