@@ -74,6 +74,7 @@ body {
     transform: translate(-50%, 0);
 }
 #spot1 {
+    z-index: 1;
     position: absolute;
     top: 272px;
     left: 883px;
@@ -81,6 +82,7 @@ body {
     transition: all 2s ease-in-out;
 }
 #spot2 {
+    z-index: 1;
     position: absolute;
     top: 272px;
     left: 277px;
@@ -89,6 +91,7 @@ body {
 }
 
 .player {
+    z-index: 0;
     opacity: 0;
     display: flex;
     position: absolute;
@@ -145,6 +148,7 @@ body {
     transform: translateY(-50px);
 }
 .spot {
+    z-index: 1;
     position: absolute;
     width: 200px;
     height: 200px;

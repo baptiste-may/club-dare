@@ -12,6 +12,8 @@ const port = 3000;
  */
 const io = require('socket.io')(http);
 
+require("dotenv").config();
+
 app.use('/jquery', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
 app.use(express.static('public'));
 
@@ -26,7 +28,7 @@ http.listen(port, () => {
 players = {};
 
 io.on("connection", (socket) => {
-    console.log(`[Connection] ${socket.id}`);
+    console.log(`[+] ${socket.id}`);
     
     socket.on("player-join", (username, color, top, left, eyesTransform) => {
         const id = "" + socket.id + "";
@@ -50,8 +52,13 @@ io.on("connection", (socket) => {
         socket.broadcast.emit("player-send-message", socket.id, message);
     });
 
+    socket.on("check-secret-token", (token) => {
+        if (process.env.SECRET_TOKEN == token) socket.emit("check-secret-token", true);
+        else socket.emit("check-secret-token", false);
+    });
+
     socket.on("disconnect", () => {
-        console.log(`[Disconnect] ${socket.id}`);
+        console.log(`[-] ${socket.id}`);
         socket.broadcast.emit("player-disconnect", socket.id);
         delete players[socket.id];
     });

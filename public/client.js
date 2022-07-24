@@ -95,11 +95,31 @@ function getCoo(coo) {
     return parseInt(coo.replace("px", ""));
 }
 
-function canMove(top, left) {
+privateZone = []
+privateZone.push({firstPoint: {top: 50, left: 550}, secondPoint: {top: 400, left: 1450}});
+
+hasSecretToken = false;
+socket.emit("check-secret-token", Cookies.get("secret-token"));
+socket.on("check-secret-token", (res) => {
+    hasSecretToken = res;
+});
+
+async function canMove(top, left) {
     if (top <= 50) return false;
     if (left <= 50) return false;
     if (top >= 2000) return false;
     if (left >= 2000) return false;
+
+    if (hasSecretToken) return true;
+
+    for (i = 0; i < privateZone.length; i++) {
+        const zone = privateZone[i];
+        const firstPoint = zone.firstPoint;
+        const secondPoint = zone.secondPoint;
+        if ((firstPoint.top <= top && top <= secondPoint.top) &&
+            (firstPoint.left <= left && left <= secondPoint.left))
+            return false;
+    }
     return true;
 }
 
