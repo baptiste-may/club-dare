@@ -40,8 +40,7 @@ body {
     z-index: 15;
     width: 75%;
     max-width: 750px;
-    height: 50%;
-    max-height: 500px;
+    height: 600px;
     margin: auto;
     background-color: gray;
     border: 5px solid rgb(175, 175, 175);
@@ -59,6 +58,16 @@ body {
 #help-tab p a:hover {
     text-decoration-color: rgba(220, 220, 220, 1);
 }
+#help-tab p input {
+    font-size: 1em;
+    background: none;
+    padding: 2% 3%;
+    border: 2px solid white;
+    border-radius: 25px;
+}
+#help-tab p input::placeholder {
+    color: white;
+}
 #close-help-tab {
     position: absolute;
     height: 50px;
@@ -69,7 +78,7 @@ body {
     cursor: pointer;
 }
 #lighting-button {
-    z-index: 14;
+    z-index: 13;
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
     position: fixed;
     top: 10px;

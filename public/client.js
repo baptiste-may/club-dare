@@ -155,3 +155,7 @@ $("#enter-button").on("click", (e) => {
     document.body.onwheel = onScrollWheel;
     document.getElementById('can-move').addEventListener('mousedown', mouseDownHandler);
 });
+
+$("#secret-code-input").focusout(() => {
+    Cookies.set("secret-token", $("#secret-code-input").val());
+});
