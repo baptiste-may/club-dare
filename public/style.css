@@ -89,6 +89,7 @@ body {
 }
 #lighting-tab {
     display: none;
+    align-content: space-evenly;
     opacity: 0;
     position: fixed;
     align-items: center;

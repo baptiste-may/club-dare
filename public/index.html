@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,11 +23,13 @@
     <img id="lighting-button" src="imgs/sun.svg">
     <div id="lighting-tab">
         <h1>Spots</h1>
-        <label>Nombre</label>
+        <label>Gobos</label>
         <input type="range" min="0" max="25" step="5" id="gobo-range">
         <label>Vitesse</label>
         <input type="range" min="250" max="7500" step="250" id="gobo-timer">
         <img id="close-lighting-tab" src="imgs/x-circle.svg">
+        <h1 id="wash-title">Wash ⚫️</h1>
+        <input type="submit" value="Activer" id="wash-button">
     </div>
     <div id="can-move">
         <div id="welcome-screen">
@@ -39,8 +41,8 @@
         <div id="game">
             <div id="dj-stuff">
                 <img id="dj-table" src="imgs/dj-table.png">
-                <img id="spot1" src="imgs/light-beam.png">
-                <img id="spot2" src="imgs/light-beam.png">
+                <img id="spot1" src="imgs/light-beam-off.png">
+                <img id="spot2" src="imgs/light-beam-off.png">
             </div>
             <div id="player" class="player" hidden>
                 <img id="player-eyes" class="player-eyes" src="imgs/eyes.png">

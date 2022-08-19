@@ -26,7 +26,7 @@ http.listen(port, () => {
 });
 
 var players = {};
-var lightingData = {spots: {number: 10, timer: 2000}};
+var lightingData = {gobos: {number: 10, timer: 2000}, wash: false};
 
 io.on("connection", (socket) => {
     console.log(`[+] ${socket.id}`);
@@ -58,17 +58,25 @@ io.on("connection", (socket) => {
         else socket.emit("check-secret-token", false);
     });
 
-    socket.on("edit-lighting", (token, data) => {
+
+    socket.on("edit-lighting-gobos", (token, data) => {
         if (process.env.SECRET_TOKEN == token) {
-            if (data.spots != undefined && data.spots.number != undefined && data.spots.timer != undefined) {
-                lightingData = data;
-                socket.broadcast.emit("edit-lighting", JSON.stringify(data));
-            }
+            lightingData.gobos = data;
+            socket.broadcast.emit("edit-lighting-gobos", JSON.stringify(data));
         }
     });
+
+    socket.on("edit-lighting-wash", (token, data) => {
+        if (process.env.SECRET_TOKEN == token) {
+            lightingData.wash = data;
+            socket.broadcast.emit("edit-lighting-wash", JSON.stringify(data));
+        }
+    });
+
     socket.on("get-lighting", () => {
         socket.emit("get-lighting", JSON.stringify(lightingData));
     });
+
 
     socket.on("disconnect", () => {
         console.log(`[-] ${socket.id}`);

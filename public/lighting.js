@@ -23,7 +23,7 @@ function animeSpots() {
 }
 
 let interval = null;
-function setSpots(number, timer) {
+function setGobos(number, timer) {
 
     clearInterval(interval);
     $("#spots").empty();
@@ -43,22 +43,15 @@ function setSpots(number, timer) {
     interval = setInterval(animeSpots, timer);
 }
 
-socket.emit("get-lighting");
-socket.on("get-lighting", (data) => {
-    data = JSON.parse(data);
-    const spotsData = data.spots;
-    setSpots(parseInt(spotsData.number), parseInt(spotsData.timer));
-});
+function gobosUpdate() {
+    setGobos($("#gobo-range").val(), $("#gobo-timer").val());
 
-function spotsUpdate() {
-    setSpots($("#gobo-range").val(), $("#gobo-timer").val());
-
-    const data = {spots: {number: $("#gobo-range").val(), timer: $("#gobo-timer").val()}};
-    socket.emit("edit-lighting", Cookies.get("secret-token"), data);
+    const data = {number: $("#gobo-range").val(), timer: $("#gobo-timer").val()};
+    socket.emit("edit-lighting-gobos", Cookies.get("secret-token"), data);
 }
 
-$("#gobo-range").on("input", spotsUpdate);
-$("#gobo-timer").on("input", spotsUpdate);
+$("#gobo-range").on("input", gobosUpdate);
+$("#gobo-timer").on("input", gobosUpdate);
 
 
 maxDeg = 45;
@@ -80,9 +73,55 @@ function moveSpot() {
 
 setInterval(moveSpot, 2000);
 
+light = true;
+flash = false;
+setInterval(() => {
+    if (flash) {
+        if (light) {
+            $("#spot1").attr("src", "imgs/light-beam-off.png");
+            $("#spot2").attr("src", "imgs/light-beam-off.png");
+        } else {
+            $("#spot1").attr("src", "imgs/light-beam-on.png");
+            $("#spot2").attr("src", "imgs/light-beam-on.png");
+        }
+        light = !light;
+    } else {
+        $("#spot1").attr("src", "imgs/light-beam-off.png");
+        $("#spot2").attr("src", "imgs/light-beam-off.png");
+    }
+}, 50);
 
-socket.on("edit-lighting", (data) => {
+function washUpdate() {
+    socket.emit("edit-lighting-wash", Cookies.get("secret-token"), flash);
+}
+
+const washButton = $("#wash-button");
+washButton.on("click", () => {
+    flash = !flash;
+    if (flash) {
+        washButton.val("Déactiver");
+        $("#wash-title").text("Wash ⚪️");
+    } else {
+        washButton.val("Activer");
+        $("#wash-title").text("Wash ⚫️");
+    }
+    washUpdate();
+});
+
+
+socket.emit("get-lighting");
+socket.on("get-lighting", (data) => {
     data = JSON.parse(data);
-    const spotsData = data.spots;
-    setSpots(parseInt(spotsData.number), parseInt(spotsData.timer));
+    const gobosData = data.gobos;
+    setGobos(parseInt(gobosData.number), parseInt(gobosData.timer));
+    const washData = data.wash;
+    flash = washData;
+});
+
+socket.on("edit-lighting-gobos", (data) => {
+    data = JSON.parse(data);
+    setGobos(parseInt(data.number), parseInt(data.timer));
+});
+socket.on("edit-lighting-wash", (data) => {
+    flash = JSON.parse(data);
 });
